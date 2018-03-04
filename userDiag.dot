@@ -1,0 +1,35 @@
+digraph arcUsers {
+  userModel[label="Users"];
+
+  subgraph clusterUserCnts {
+    label="Controllers";
+    labeljust=l;
+    color=none;
+
+    registerUserCnt[label="Register User"];
+    userLoginCnt[label="User Login"];
+  }
+
+  userModel->registerUserCnt;
+  userModel->userLoginCnt;
+
+  subgraph clusterUserViews {
+    label="Views";
+    labeljust=l;
+    color=none;
+
+    registerFailureView[label="Registration Failure"];
+    registerPageView[label="Registration Success"];
+    userProfileView[label="User Profile"];
+    loginSuccessView[label="Login Success"];
+    loginFailureView[label="Login Failure"];
+  }
+
+  registerUserCnt->registerFailureView;
+  registerUserCnt->registerPageView;
+  registerPageView->registerFailureView;
+  registerPageView->userProfileView;
+  loginSuccessView->userProfileView;
+  userLoginCnt->loginFailureView;
+  userLoginCnt->loginSuccessView;
+}

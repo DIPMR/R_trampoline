@@ -1,0 +1,33 @@
+digraph arcEvents {
+  eventModel[label="Events"];
+
+  subgraph clusterEventCnts {
+    label="Controllers";
+    labeljust=l;
+    color=none;
+
+    eventInfoCnt[label="Event Information"];
+    rsvpController[label="RSVP"];
+    createEventCnt[label="Create Event"];
+  }
+
+  eventModel->eventInfoCnt;
+  eventModel->rsvpController;
+  eventModel->createEventCnt;
+
+  subgraph clusterEventViews {
+    label="Views";
+    labeljust=l;
+    color=none;
+
+    eventListView[label="Event List"];
+    rsvpView[label="RSVP"];
+    newEventView[label="New Event"];
+  }
+
+  eventInfoCnt->eventListView;
+  eventListView->rsvpView;
+  newEventView->rsvpView;
+  createEventCnt->newEventView;
+  rsvpController->rsvpView;
+}

@@ -1,0 +1,37 @@
+digraph arcAnimals {
+  animalModel[label="Animals"];
+
+  subgraph clusterAnimalCnts {
+    label="Controllers";
+    labeljust=l;
+    color=none;
+    findARescueCnt[label="Find a Rescue"];
+    rescueInfoCnt[label="Rescue Information"];
+    browseAnimalsCnt[label="Browse Animals"];
+    animalDetailsCnt[label="Animal Details"];
+  }
+
+  animalModel->findARescueCnt;
+  animalModel->rescueInfoCnt;
+  animalModel->browseAnimalsCnt;
+  animalModel->animalDetailsCnt;
+
+  subgraph clusterAnimalViews {
+    label="Views";
+    labeljust=l;
+    color=none;
+
+    rescueListView[label="Rescue List"];
+    rescueInfoView[label="Rescue Detail"];
+    animalListView[label="Animal List"];
+    animalInfoView[label="Animal Detail"];
+  }
+
+  findARescueCnt->rescueListView;
+  rescueInfoCnt->rescueInfoView;
+  browseAnimalsCnt->animalListView;
+  animalDetailsCnt->animalInfoView;
+  rescueInfoView->rescueListView;
+  rescueListView->rescueInfoView;
+  animalInfoView->animalListView;
+}
